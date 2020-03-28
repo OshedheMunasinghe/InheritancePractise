@@ -1,6 +1,8 @@
+import java.util.Objects;
+
 public class Main {
     public static void main(String[] args) {
-        Object[] list = {new Dog(), new DogFood()};
+        //Object[] list = {new Dog(), new DogFood()};
         /**
          * //This is a classic kindly way to call Dog bark
 
@@ -18,10 +20,17 @@ public class Main {
          }//end for
          **/
 
-        Dog dog = new Dog();
         //   System.out.println(dog.toString()); // if you just call like this, it will call object Dog but id nr.
         //dog.makeSound();
-        dog.findFood();
+        // dog.findFood();
+
+
+        Dog dog1 = new Dog("Bark");
+        Dog dog2 = new Dog("Woof");
+
+        //Q: Is dog1 same object (same dog) as dog2
+        System.out.println(dog1.equals(dog2)); //The answer is false
+
     }//end main
 }//end class Main
 
@@ -42,11 +51,24 @@ abstract class Animal {
     public String toString() {
         return getClass().getSimpleName() + ": sound = " + sound;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Animal animal = (Animal) o;
+        return sound.equals(animal.sound);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(sound);
+    }
 }//end class Animal
 
 class Dog extends Animal {
-    Dog() {
-        super("bark");
+    Dog(String sound) {
+        super(sound);
     }//end constructor
 
     @Override
