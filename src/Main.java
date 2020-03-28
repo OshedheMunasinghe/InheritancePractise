@@ -19,24 +19,27 @@ public class Main {
          **/
 
         Dog dog = new Dog();
-     //   System.out.println(dog.toString()); // if you just call like this, it will call object Dog but id nr.
-        dog.makeSound();
+        //   System.out.println(dog.toString()); // if you just call like this, it will call object Dog but id nr.
+        //dog.makeSound();
+        dog.findFood();
     }//end main
 }//end class Main
 
-class Animal {
+abstract class Animal {
     String sound = "";
 
-    Animal(String sound){
+    Animal(String sound) {
         this.sound = sound;
     }
+
+    abstract void findFood();
 
     public void makeSound() {
         System.out.println(sound);
     }
 
     //This method override from Class String!!
-    public String toString(){
+    public String toString() {
         return getClass().getSimpleName() + ": sound = " + sound;
     }
 }//end class Animal
@@ -45,6 +48,12 @@ class Dog extends Animal {
     Dog() {
         super("bark");
     }//end constructor
+
+    @Override
+    void findFood() {
+        System.out.println("*looks at human*");
+        makeSound();
+    }
 
     @Override
     public void makeSound() {
